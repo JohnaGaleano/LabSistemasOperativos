@@ -1,0 +1,7 @@
+caracteres: 49
+lineas: 3
+palabras: 11
+espacios: 8
+mayusculas: 1
+minusculas: 30
+digitos: 6
