@@ -11,9 +11,14 @@ int main(int argc, char *argv[])
     int status_h2, status_h3;
     pid_t pid_n4, pid_n5;
     int status_n4, status_n5;
-
+    char pid[201];
+    int pp = getppid();
+    char ppid[10];
+    sprintf(ppid, "%d", pp);
+    printf("Hello %s\n", ppid);
+    strcat(pid, "pstree -n ");
+    strcat(pid, ppid);
     printf("Ps padre: mi PID es %d, y el PID mi padre es %d\n", getpid(), getppid());
-    int ppid = (int)getpid();
     pid_h3 = fork();
     if (pid_h3 == 0)
     {
@@ -49,20 +54,15 @@ int main(int argc, char *argv[])
         }
         else
         {
+            system(pid);
             // El papa decidió esperar todos los hijos al final
             wait(&status_h2); // Papa esperando un hijo
             printf("Ps padre: ha finalizado Ps 2 con estado %d\n", status_h2);
             wait(&status_h3); // Papa esperando el ultimo hijo
             printf("Ps padre: ha finalizado Ps 3 con estado %d\n", status_h3);
-            //char *pid;
-            //strcpy(pid, 'pstree ');
-            //strcpy(pid, ppid );
-            //printf("%s\n",pid);
-
-            //system("pstree");
         }
     }
-    
-    //return 0;
-    pause();
+
+    return 0;
+    //pause();
 }
