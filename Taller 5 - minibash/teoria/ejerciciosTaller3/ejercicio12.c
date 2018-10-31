@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     }
     if (argc == 2)
     {
-        char *pid = argv[1]; //contiene el nombre del programa a ejecutar
+        char *psn = argv[1]; //contiene el nombre del programa a ejecutar
         int status;
         pid_t child_pid;
         /* Creacion del proceso hijo. */
@@ -24,11 +24,8 @@ int main(int argc, char *argv[])
         }
         else if (child_pid == 0)
         {
-            char *args[] = {"/bin/ls", "-l", ".", NULL};
-            system("pwd");
-            system("ls");
-            //execv("/bin/ls", args);
-            printf("aqui va\n");
+            execlp(psn,psn, 0);
+            printf("El comando '%s' es inválido\n", psn);
         }
         else
         {
