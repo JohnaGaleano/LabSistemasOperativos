@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     int pp = getppid();
     char ppid[10];
     sprintf(ppid, "%d", pp);
-    printf("Hello %s\n", ppid);
     strcat(pid, "pstree -n ");
     strcat(pid, ppid);
     printf("Ps padre: mi PID es %d, y el PID mi padre es %d\n", getpid(), getppid());
