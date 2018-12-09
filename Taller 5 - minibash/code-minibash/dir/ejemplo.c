@@ -60,7 +60,7 @@ int main()
       {
         /* int argc = items; */
         /* char *argv[] = items; */
-        char **argv = items;
+        char **argv = items; 
         int i = 1;
         while (argv[i] != NULL)
         {
@@ -71,17 +71,26 @@ int main()
       }
       else if (strcmp(items[0], "udea-clr") == 0)
       {
-        int result = system("reset");
-        if (result == -1)
+        int **argc = items;
+        /* char *argv[] = items; */
+        if (argc[0] == 1)
         {
-          printf("Ocurrio un error al ejecutar el comando.\n");
+          int result = system("reset");
+          if (result == -1)
+          {
+            printf("Ocurrio un error al ejecutar el comando.\n");
+          }
+        }
+        else
+        {
+          printf("No se esperaba mas de 1 parámetro.\n");
         }
       }
       else if (strcmp(items[0], "udea-time") == 0)
       {
         time_t r_time;
         time(&r_time);
-        printf("Fecha y hora actual: %s", ctime(&r_time));
+        printf("Fecha y hora actual: %s",  ctime(&r_time));
       }
       else if (strcmp(items[0], "udea-exit") == 0)
       {
@@ -89,26 +98,7 @@ int main()
       }
       else
       {
-        int status;
-        pid_t child_pid;
-        /* Creacion del proceso hijo. */
-        if ((child_pid = fork()) < 0)
-        {
-          perror("No es posible ejecutar el programa");
-          exit(-1);
-        }
-        else if (child_pid == 0)
-        {
-          execlp(items[0], items, 0);
-          printf("El comando '%s' es inválido\n", items[0]);
-        }
-        if (!background)
-        {
-          // Este es el padre... Llamado a wait para esperar a que el hijo termine
-          wait(&status);
-        }
-
-        return 0;
+        /* comados externos */
       }
     }
     liberaItems(items);
